@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Wealth Our Way</title>
+  <meta name="description" content="We help clients create generational wealth through education, planning, and access." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- You can swap fonts later. These are quiet, modern defaults. -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+    :root {
+      /* Core neutrals (keep the beige look) */
+      --canvas: #FAF9F6;        /* warm ivory */
+      --ink: #0A0A0A;           /* rich black */
+      --stone: #F6F2EB;         /* softer section bg */
+      --champagne: #D8C9A9;     /* muted gold */
+      --gold: #C9A24E;          /* brushed metallic */
+      --oxblood: #4B1F24;       /* optional accent */
+
+      /* Greens from palette image */
+      --emerald: #1c584c;       /* Updated primary accent */
+      --leaf: #1c584c;          /* Updated secondary accent */
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      color: var(--ink);
+      background: var(--canvas);
+      line-height: 1.6;
+    }
+
+    /* Layout */
+    .container { width: min(1200px, 92vw); margin: 0 auto; }
+    header { position: sticky; top: 0; z-index: 50; backdrop-filter: saturate(140%) blur(6px); background: color-mix(in sRGB, var(--canvas) 90%, transparent); border-bottom: 1px solid rgba(10,10,10,0.06); }
+    .nav { display: flex; align-items: center; justify-content: space-between; padding: 16px 0; }
+    .brand { display: flex; align-items: center; gap: 12px; font-weight: 800; letter-spacing: .04em; justify-content: flex-start; }
+    .brand-mark { width: 36px; height: 36px; border-radius: 10px; background: url('./assets/logo.png') center/cover no-repeat; box-shadow: inset 0 0 0 1px rgba(10,10,10,0.08); }
+    .nav a { text-decoration: none; color: var(--emerald); opacity: .9; padding: 8px 12px; border-radius: 10px; }
+    .nav a:hover { background: color-mix(in sRGB, var(--leaf) 16%, white); opacity: 1; }
+    
+    /* Hamburger Menu */
+    .hamburger { display: none; flex-direction: column; cursor: pointer; padding: 8px; }
+    .hamburger span { width: 25px; height: 3px; background: var(--emerald); margin: 3px 0; transition: 0.3s; border-radius: 2px; }
+    .hamburger.active span:nth-child(1) { transform: rotate(-45deg) translate(-5px, 6px); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: rotate(45deg) translate(-5px, -6px); }
+    .nav-menu { display: flex; }
+    .nav-menu.active { display: flex; }
+
+    /* Hero */
+    .hero { position: relative; }
+    .hero-inner { display: grid; grid-template-columns: 1.2fr .8fr; gap: 48px; padding: 72px 0; align-items: center; }
+    .kicker { font-size: 12px; text-transform: uppercase; letter-spacing: .22em; color: var(--leaf); font-weight: 700; }
+    .headline { font-family: "Playfair Display", Georgia, serif; font-size: clamp(42px, 6vw, 72px); line-height: 1.05; margin: 12px 0 16px; }
+    .sub { font-size: 18px; opacity: .9; max-width: 58ch; }
+    .cta-row { display: flex; gap: 14px; margin-top: 28px; }
+    .btn { display: inline-flex; align-items: center; gap: 10px; padding: 14px 18px; border-radius: 14px; font-weight: 700; letter-spacing: .02em; text-decoration: none; transition: all .3s ease; }
+    .btn:visited { color: inherit; }
+    .btn-primary { background: var(--emerald); color: white; box-shadow: 0 10px 20px rgba(0,0,0,.12); }
+    .btn-primary:visited { color: #FFF; }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 15px 30px rgba(0,0,0,.18); background: color-mix(in sRGB, var(--emerald) 85%, black); color: #FFF; }
+    .btn-ghost { background: color-mix(in sRGB, var(--leaf) 10%, white); color: var(--ink); border: 1px solid color-mix(in sRGB, var(--emerald) 18%, transparent); }
+    .btn-ghost:visited { color: var(--ink); }
+    .btn-ghost:hover { transform: translateY(-2px); box-shadow: 0 15px 30px rgba(0,0,0,.1); background: color-mix(in sRGB, var(--leaf) 18%, white); color: var(--ink); }
+
+    .hero-media { aspect-ratio: 4/5; border-radius: 24px; overflow: hidden; background: linear-gradient(0deg, rgba(10,10,10,.45), rgba(10,10,10,.05)), url('./assets/tank-hero.png') center/cover no-repeat; box-shadow: 0 30px 60px rgba(0,0,0,.12); }
+    .hero-credit { position: absolute; right: 4vw; bottom: 18px; font-size: 12px; color: rgba(10,10,10,.6); }
+
+    /* Sections */
+    .section { padding: 90px 0; }
+    .section.alt { background: var(--stone); }
+    .section.dark { background: var(--emerald); color: #F3F3F3; }
+    .section h2 { font-family: "Playfair Display", Georgia, serif; font-size: clamp(28px, 4vw, 44px); margin: 0 0 12px; color: var(--emerald); }
+    .section p.lead { opacity: .9; max-width: 70ch; }
+
+    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 22px; }
+    .card { grid-column: span 6; background: white; border-radius: 22px; overflow: hidden; border: 1px solid rgba(10,10,10,.08); box-shadow: 0 10px 30px rgba(0,0,0,.06); display: flex; flex-direction: column; height: fit-content; }
+    .card.dark { background: white; color: var(--ink); border-color: rgba(10,10,10,.08); }
+    .media { background: #111; aspect-ratio: 1/1; position: relative; cursor: pointer; overflow: hidden; }
+    .media img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; opacity: .85; transition: opacity .3s ease; }
+    .media:hover img { opacity: 1; }
+    .tag { position: absolute; top: 14px; left: 14px; padding: 6px 10px; border-radius: 999px; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; background: color-mix(in sRGB, var(--leaf) 30%, white); border: 1px solid color-mix(in sRGB, var(--emerald) 25%, transparent); cursor: pointer; transition: all .2s ease; }
+    .tag:hover { background: color-mix(in sRGB, var(--leaf) 50%, white); transform: scale(1.05); }
+
+    .card-body { padding: 22px; display: flex; flex-direction: column; gap: 10px; height: 100%; flex: 1; }
+    .card h3 { margin: 0; font-size: 22px; }
+    .meta { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; opacity: .7; }
+    .logo-row { display: flex; align-items: center; gap: 12px; opacity: .9; }
+    .logo { width: 36px; height: 36px; border-radius: 9px; background: #EEE; background-size: cover; background-position: center; flex-shrink: 0; box-shadow: inset 0 0 0 1px rgba(10,10,10,.06); }
+    .card p { margin: 0; line-height: 1.5; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; flex: 1; }
+
+    .card a { align-self: stretch; margin-top: auto; width: 100%; text-align: center; flex-shrink: 0; }
+
+    /* Testimonials */
+    .testimonial { grid-column: span 4; background: white; border-radius: 22px; border: 1px solid rgba(10,10,10,.08); padding: 22px; box-shadow: 0 10px 30px rgba(0,0,0,.06); }
+    .testimonial .quote { font-size: 18px; line-height: 1.6; }
+    .testimonial .who { margin-top: 14px; font-weight: 700; }
+
+    /* Section: About */
+    .about-content { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; margin-top: 32px; }
+    .about-text { display: grid; gap: 20px; }
+    .about-text p { margin: 0; line-height: 1.7; }
+    .about-text .lead { font-size: 20px; font-weight: 500; }
+
+    /* Footer */
+    footer { background: var(--emerald); color: #EDEAE2; padding: 48px 0; }
+    .foot { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 28px; text-align: left; align-items: start; }
+    .foot > div:first-child { text-align: left; }
+    .foot h4 { margin: 0 0 10px; font-size: 14px; letter-spacing: .16em; text-transform: uppercase; color: var(--champagne); }
+    .foot a { color: #EDEAE2; text-decoration: none; opacity: .85; }
+    .foot a:hover { opacity: 1; }
+    .contact-info ul { list-style: none; padding: 0; margin: 0; }
+    .contact-info li { display: flex; align-items: center; margin-bottom: 8px; }
+    .contact-info li img { margin-right: 8px; }
+    .social { display: flex; gap: 12px; }
+    .social a { font-size: 20px; color: #EDEAE2; opacity: .7; transition: opacity 0.3s; }
+    .social a:hover { opacity: 1; }
+    .copy { border-top: 1px solid rgba(255,255,255,.12); margin-top: 28px; padding-top: 18px; font-size: 12px; opacity: .8; }
+
+    /* Tabs */
+    .tabs { display: flex; gap: 8px; margin: 32px 0 26px; }
+    .tab { padding: 12px 20px; border-radius: 12px; background: transparent; border: 1px solid color-mix(in sRGB, var(--emerald) 20%, transparent); color: var(--ink); font-weight: 600; cursor: pointer; transition: all .2s ease; }
+    .tab.active { background: var(--emerald); color: white; }
+    .tab:hover:not(.active) { background: rgba(10,10,10,.04); }
+
+    /* Portfolio filtering */
+    .portfolio-item { transition: opacity .3s ease, transform .3s ease; }
+    .portfolio-item.hidden { opacity: 0; transform: scale(0.95); pointer-events: none; display: none; }
+
+    /* Fade in */
+    .reveal { opacity: 0; transform: translateY(18px); filter: blur(2px); }
+    .reveal.show { opacity: 1; transform: translateY(0); filter: none; transition: opacity .7s ease, transform .7s ease, filter .7s ease; }
+
+    /* Modal */
+    .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.9); }
+    .modal.show { display: flex; align-items: center; justify-content: center; }
+    .modal-content { max-width: 90vw; max-height: 90vh; object-fit: contain; border-radius: 12px; }
+    .modal-close { position: absolute; top: 20px; right: 30px; color: white; font-size: 40px; font-weight: bold; cursor: pointer; z-index: 1001; }
+    .modal-close:hover { opacity: 0.7; }
+    .modal-overlay { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.7), rgba(0,0,0,1)); padding: 120px 20px 20px; color: white; text-align: center; }
+    .modal-text { font-size: 18px; margin-bottom: 20px; font-weight: 600; }
+    .modal-form { display: flex; gap: 10px; max-width: 400px; margin: 0 auto; }
+    .modal-input { flex: 1; padding: 12px 16px; border-radius: 8px; border: none; font-size: 16px; }
+    .modal-submit { padding: 12px 24px; background: var(--emerald); color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; }
+    .modal-submit:hover { background: color-mix(in sRGB, var(--emerald) 85%, black); }
+
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 30px; }
+      .grid { grid-template-columns: 1fr; }
+      .card { grid-column: span 12; }
+      .about-content { grid-template-columns: 1fr; gap: 30px; }
+      .foot { grid-template-columns: 1fr; gap: 20px; }
+      .modal-form { flex-direction: column; }
+      .modal-overlay { padding: 20px 15px 15px; }
+      .modal-text { font-size: 16px; margin-bottom: 15px; }
+      .cta-row { flex-direction: column; gap: 12px; }
+      .btn { width: 100%; justify-content: center; }
+      .hamburger { display: flex; }
+      .nav-menu { 
+        display: none; 
+        position: absolute; 
+        top: 100%; 
+        left: 0; 
+        right: 0; 
+        background: color-mix(in sRGB, var(--canvas) 95%, transparent); 
+        backdrop-filter: saturate(140%) blur(6px);
+        border-bottom: 1px solid rgba(10,10,10,0.06);
+        flex-direction: column; 
+        padding: 20px; 
+        gap: 12px; 
+      }
+      .nav-menu.active { display: flex; }
+      .nav a { padding: 12px 16px; width: 100%; text-align: center; }
+      .container { padding: 0 20px; }
+      .section { padding: 60px 0; }
+      .hero { padding: 40px 0; }
+      .testimonial { grid-column: span 12; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span>Wealth Our Way</span>
+      </div>
+      <div class="hamburger" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <nav class="nav-menu">
+        <a href="#services">Free Resources</a>
+        <a href="about.html">About</a>
+        <a href="testimonials.html">Testimonials</a>
+        <a href="#wealth-jumpstart">Wealth Jumpstart</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero container reveal">
+      <div class="hero-inner">
+        <div>
+          <div class="kicker">Financial Guidance, Built For You</div>
+          <h1 class="headline">We help create generational wealth for our clients.</h1>
+          <p class="sub">Straightforward education, proven strategies, and access to the same playbook the wealthy use—delivered with clarity and care.</p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="#wealth-jumpstart">Start Creating Wealth</a>
+            <a class="btn btn-ghost" href="#services">Explore Free Resources</a>
+          </div>
+        </div>
+        <div class="hero-media" role="img" aria-label="Photo of Charles &quot;Tank&quot; Harris"></div>
+      </div>
+  
+    </section>
+
+    <!-- FOUNDATION -->
+    <section id="foundation" class="section dark reveal">
+      <div class="container">
+        <h2 style="color: white;">THE FOUNDATION TO YOUR SUCCESS</h2>
+        <p class="lead" style="color: #F3F3F3;">Wealth Our Way was founded with the belief that although all are created equal, all have not had equal access. We are dedicated to leveling the financial playing field and granting the same access that the wealthy have to every member of our society. Our mission is simple and concise, educate and facilitate. The foundation to any successful strategy or plan is an understanding of what it takes to be successful in that arena. At Wealth Our Way, we develop your financial literacy and promote your monetary excellence.</p>
+      </div>
+    </section>
+
+    <!-- SERVICES / OFFERINGS -->
+    <section id="services" class="section reveal">
+      <div class="container">
+        <h2>Start building today</h2>
+        <p class="lead">Here are some free resources to get you started on your financial journey.</p>
+        <div class="grid" style="margin-top: 26px;">
+          <!-- Ebook -->
+          <article class="card reveal">
+            <div class="media" onclick="openModal('./assets/E-book.png')">
+              <img src="./assets/E-book.png" alt="5 Major Money Moves ebook" />
+            </div>
+            <div class="card-body">
+              <div>
+                <h3>5 Major Money Moves & 3 Money Must Do's</h3>
+                <div class="meta">Download • Free</div>
+              </div>
+              <p>Unlock the essential moves that can transform your financial future. Quick, clear, and actionable.</p>
+              <a class="btn btn-primary" onclick="openModal('./assets/E-book.png')">Download</a>
+            </div>
+          </article>
+
+          <!-- Mini-Course -->
+          <article class="card reveal">
+            <div class="media" onclick="openModal('./assets/big-mini-course.png')">
+              <img src="./assets/big-mini-course.png" alt="B.I.G. Mini-Course" />
+            </div>
+            <div class="card-body">
+              <div>
+                <h3>B.I.G. Mini-Course</h3>
+                <div class="meta">Course • 1 Lesson • Free</div>
+              </div>
+              <p>Take charge of your money—and your future. Build your confidence and strategy.</p>
+              <a class="btn btn-primary" onclick="openModal('./assets/big-mini-course.png')">Take course</a>
+            </div>
+          </article>
+
+    </section>
+
+    <!-- WEALTH JUMPSTART -->
+    <section id="wealth-jumpstart" class="section dark reveal">
+      <div class="container">
+        <h2 style="color: white;">Join The Wealth Jumpstart</h2>
+        <p class="lead" style="color: #F3F3F3; margin-bottom: 30px;">Our program is designed to remove uncertainty about your financial future, lower the cost of investment and insurance decisions, and protect your money so you can finally focus on building wealth with clarity and confidence. It's about saving smarter, making smarter moves, and creating security that lasts.</p>
+        
+        <p style="color: #F3F3F3; margin-bottom: 40px;">The Jumpstart includes a Simple Will and key estate documents, a Durable Power of Attorney and Health Care Proxy, a personalized retirement investment review, and a life insurance needs analysis. You'll also receive a 30-day trial of the WOW Wealth Portal and a full-year membership to our private community for accountability and support.</p>
+
+        <div style="text-align: center; margin-top: 40px;">
+          <h3 style="color: white; font-size: 24px; margin-bottom: 20px;">Be the first to know when it goes live.</h3>
+          <a class="btn" href="#join-jumpstart" style="font-size: 18px; padding: 16px 24px; background: #0A0A0A; color: white; border: none; border-radius: 14px; text-decoration: none; display: inline-flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: .02em; transition: all .3s ease; box-shadow: 0 10px 20px rgba(0,0,0,.12);">Join the Waitlist</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT CHARLES -->
+    <section id="about" class="section reveal">
+      <div class="container">
+        <h2>About Charles "Tank" Harris</h2>
+        <div class="about-content">
+          <div class="about-image">
+            <img src="./assets/tank-about.png" alt="Charles Tank Harris" style="aspect-ratio: 4/5; border-radius: 24px; width: 100%; object-fit: cover;" />
+          </div>
+          <div class="about-text">
+            <p class="lead">Charles began his financial services career in 1997 with Smith Barney after graduating from Temple University.</p>
+            <p>He built a practice that managed over $100M of assets for professional athletes, universities, foundations, and small business owners. He founded The Sports & Entertainment financial group in 2001 and sold the company in 2012.</p>
+            <p>He partnered with New York Life Insurance Company to build an affordable investment and insurance program for people who had previously been shut out of the financial services industry.</p>
+            <p>In 2019 he branched out on his own to form the Financial Planning firm, Wealth Our Way.</p>
+            <p>When it comes to creating a detailed plan that meets your financial goals, there is simply no one better to ask for advice and guidance.</p>
+        </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section id="testimonials" class="section alt reveal">
+      <div class="container">
+        <h2>What clients are saying</h2>
+        <div class="grid" style="margin-top: 26px;">
+          <div class="testimonial">
+            <div class="quote">"My affairs are now in order and with Tank's continued guidance I have no doubt that my finances are set for myself and my family for a long time to come."</div>
+            <div class="who">— Anthony Wilkins</div>
+          </div>
+          <div class="testimonial">
+            <div class="quote">"My transition into retirement has been stress free because of the planning and assistance provided by Wealth Our Way."</div>
+            <div class="who">— Vicki Poole</div>
+          </div>
+          <div class="testimonial">
+            <div class="quote">"Wealth Our Way has made estate and financial planning stress-free and brought us peace of mind."</div>
+            <div class="who">— Kenya Felton</div>
+          </div>
+        </div>
+        <div style="text-align: center; margin-top: 40px;">
+          <a class="btn btn-ghost" href="testimonials.html">See more testimonials</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  
+
+  <footer>
+    <div class="container">
+      <div class="foot">
+        <div style="display: flex; flex-direction: column; align-items: flex-start;">
+          <div class="brand" style="margin-bottom:10px;">
+            <span class="brand-mark" aria-hidden="true"></span>
+            <span>Wealth Our Way</span>
+          </div>
+          <p style="margin-top: 0;">Education, access, and planning that help you build generational wealth.</p>
+        </div>
+        <div>
+          <h4>Join the list</h4>
+          <form onsubmit="event.preventDefault(); alert('Thanks for subscribing!');">
+            <input aria-label="Email" type="email" required placeholder="Email" style="padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,.22);background:#111;color:#F3F3F3;width:100%;max-width:260px;"/>
+            <div style="height:8px"></div>
+            <button class="btn" type="submit" style="background: #0A0A0A; color: white; border: none; border-radius: 10px; padding: 10px 16px; font-weight: 600; cursor: pointer;">Subscribe</button>
+          </form>
+        </div>
+        <div>
+          <h4>Connect</h4>
+          <div class="contact-info">
+            <ul>
+        
+          <li><img src="https://i0.wp.com/ufa.mvw.mybluehost.me/wp-content/uploads/2022/06/mail-icon.png?w=1080" alt="Email" style="width:16px;height:16px;margin-right:8px;"> <a href="mailto:community@wealthourway.com">community@wealthourway.com</a></li>
+              <li><img src="https://i0.wp.com/ufa.mvw.mybluehost.me/wp-content/uploads/2022/06/globe-icon.png?w=1080" alt="Website" style="width:16px;height:16px;margin-right:8px;"> <a href="https://www.wealthourway.com/">www.wealthourway.com</a></li>
+            </ul>
+          </div>
+          <div class="social" style="margin-top:16px;">
+            <a href="https://www.facebook.com/Wealth-Our-Way-100243531554670/" target="_blank" rel="noopener"><i class="fa fa-facebook-square" aria-hidden="true"></i></a>
+            <a href="https://www.linkedin.com/in/wealth-our-way-5001791b4" target="_blank" rel="noopener"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a>
+            <a href="https://www.instagram.com/wealthourway/" target="_blank" rel="noopener"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+            <a href="https://www.youtube.com/channel/UCSncHxBYihk2orv87SiFzXQ?view_as=subscriber" target="_blank" rel="noopener"><i class="fa fa-youtube-play" aria-hidden="true"></i></a>
+            <a href="https://twitter.com/WealthOurWay" target="_blank" rel="noopener"><i class="fa fa-twitter-square"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="copy">© <span id="year"></span> Charles Harris. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <!-- Modal -->
+  <div id="imageModal" class="modal">
+    <span class="modal-close" onclick="closeModal()">&times;</span>
+    <div style="position: relative; display: inline-block;">
+      <img class="modal-content" id="modalImage" alt="Full size image">
+      <div class="modal-overlay">
+        <div class="modal-text" id="modalText">Enter your email to download the ebook or get access to the ebook</div>
+        <form class="modal-form" onsubmit="event.preventDefault(); alert('Thank you! We will send you the download link shortly.'); closeModal();">
+          <input type="email" class="modal-input" placeholder="Enter your email" required>
+          <button type="submit" class="modal-submit">Get Access</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // IntersectionObserver fade-ins
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+    // Fallback for older browsers: reveal immediately
+    if (!('IntersectionObserver' in window)) {
+      document.querySelectorAll('.reveal').forEach(el => el.classList.add('show'));
+    }
+
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Hamburger menu toggle
+    function toggleMenu() {
+      const hamburger = document.querySelector('.hamburger');
+      const navMenu = document.querySelector('.nav-menu');
+      
+      hamburger.classList.toggle('active');
+      navMenu.classList.toggle('active');
+    }
+
+    // Close menu when clicking on a link
+    document.querySelectorAll('.nav-menu a').forEach(link => {
+      link.addEventListener('click', () => {
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+        
+        hamburger.classList.remove('active');
+        navMenu.classList.remove('active');
+      });
+    });
+
+    // Modal functions
+    function openModal(imageSrc) {
+      const modal = document.getElementById('imageModal');
+      const modalImg = document.getElementById('modalImage');
+      const modalText = document.getElementById('modalText');
+      modal.classList.add('show');
+      modalImg.src = imageSrc;
+      
+      // Update text based on which image is clicked
+      if (imageSrc.includes('big-mini-course')) {
+        modalText.textContent = 'Enter your email to get access to the B.I.G. Mini-Course';
+      } else {
+        modalText.textContent = 'Enter your email to download the ebook or get access to the ebook';
+      }
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('imageModal');
+      modal.classList.remove('show');
+    }
+
+    // Close modal when clicking outside the image
+    document.getElementById('imageModal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeModal();
+      }
+    });
+
+    // Close modal with Escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeModal();
+      }
+    });
+  </script>
+</body>
+</html>

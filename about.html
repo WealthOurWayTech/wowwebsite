@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About Charles "Tank" Harris - Wealth Our Way</title>
+  <meta name="description" content="Learn about Charles 'Tank' Harris, founder of Wealth Our Way, and his journey from poverty to financial expertise." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* Core neutrals (keep the beige look) */
+      --canvas: #FAF9F6;        /* warm ivory */
+      --ink: #0A0A0A;           /* rich black */
+      --stone: #F6F2EB;         /* softer section bg */
+      --champagne: #D8C9A9;     /* muted gold */
+      --gold: #C9A24E;          /* brushed metallic */
+      --oxblood: #4B1F24;       /* optional accent */
+
+      /* Greens from palette image */
+      --emerald: #1c584c;       /* Updated primary accent */
+      --leaf: #1c584c;          /* Updated secondary accent */
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      color: var(--ink);
+      background: var(--canvas);
+      line-height: 1.6;
+    }
+
+    /* Layout */
+    .container { width: min(1200px, 92vw); margin: 0 auto; }
+    header { position: sticky; top: 0; z-index: 50; backdrop-filter: saturate(140%) blur(6px); background: color-mix(in sRGB, var(--canvas) 90%, transparent); border-bottom: 1px solid rgba(10,10,10,0.06); }
+    .nav { display: flex; align-items: center; justify-content: space-between; padding: 16px 0; }
+    .brand { display: flex; align-items: center; gap: 12px; font-weight: 800; letter-spacing: .04em; }
+    .brand-mark { width: 36px; height: 36px; border-radius: 10px; background: url('./assets/logo.png') center/cover no-repeat; box-shadow: inset 0 0 0 1px rgba(10,10,10,0.08); }
+    .nav a { text-decoration: none; color: var(--emerald); opacity: .9; padding: 8px 12px; border-radius: 10px; }
+    .nav a:hover { background: color-mix(in sRGB, var(--leaf) 16%, white); opacity: 1; }
+
+    /* Hero */
+    .hero { position: relative; padding: 60px 0; }
+    .hero-content { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+    .hero-text h1 { font-family: "Playfair Display", Georgia, serif; font-size: clamp(36px, 5vw, 56px); line-height: 1.1; margin: 0 0 20px; color: var(--emerald); }
+    .hero-text .subtitle { font-size: 20px; color: var(--champagne); font-weight: 600; margin-bottom: 30px; }
+    .hero-image { aspect-ratio: 4/5; border-radius: 24px; overflow: hidden; background: linear-gradient(0deg, rgba(10,10,10,.45), rgba(10,10,10,.05)), url('./assets/tank-about.png') center/cover no-repeat; box-shadow: 0 30px 60px rgba(0,0,0,.12); }
+
+    /* Story Section */
+    .story { padding: 80px 0; }
+    .story-content { max-width: 800px; margin: 0 auto; }
+    .story h2 { font-family: "Playfair Display", Georgia, serif; font-size: clamp(28px, 4vw, 40px); margin: 0 0 40px; color: var(--emerald); text-align: center; }
+    .story p { font-size: 18px; line-height: 1.8; margin-bottom: 24px; color: var(--ink); }
+    .story .highlight { background: var(--stone); padding: 30px; border-radius: 16px; margin: 40px 0; border-left: 4px solid var(--emerald); }
+    .story .highlight p { margin-bottom: 16px; font-style: italic; }
+    .story .highlight p:last-child { margin-bottom: 0; font-weight: 600; color: var(--emerald); }
+
+    /* Mission Section */
+    .mission { background: var(--emerald); color: #F3F3F3; padding: 80px 0; }
+    .mission-content { max-width: 800px; margin: 0 auto; text-align: center; }
+    .mission h2 { font-family: "Playfair Display", Georgia, serif; font-size: clamp(28px, 4vw, 40px); margin: 0 0 30px; color: white; }
+    .mission p { font-size: 18px; line-height: 1.8; margin-bottom: 24px; }
+    .mission .signature { margin-top: 40px; font-family: "Playfair Display", Georgia, serif; font-size: 20px; font-weight: 600; }
+
+    /* CTA Section */
+    .cta-section { padding: 80px 0; background: var(--stone); text-align: center; }
+    .cta-content h2 { font-family: "Playfair Display", Georgia, serif; font-size: clamp(28px, 4vw, 40px); margin: 0 0 20px; color: var(--emerald); }
+    .cta-content p { font-size: 18px; margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto; }
+    .btn { display: inline-flex; align-items: center; gap: 10px; padding: 14px 18px; border-radius: 14px; font-weight: 700; letter-spacing: .02em; text-decoration: none; transition: all .3s ease; }
+    .btn-primary { background: var(--emerald); color: white; box-shadow: 0 10px 20px rgba(0,0,0,.12); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 15px 30px rgba(0,0,0,.18); background: color-mix(in sRGB, var(--emerald) 85%, black); }
+
+    /* Footer */
+    footer { background: var(--emerald); color: #EDEAE2; padding: 48px 0; }
+    .foot { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 28px; text-align: left; }
+    .foot h4 { margin: 0 0 10px; font-size: 14px; letter-spacing: .16em; text-transform: uppercase; color: var(--champagne); }
+    .foot a { color: #EDEAE2; text-decoration: none; opacity: .85; }
+    .foot a:hover { opacity: 1; }
+    .copy { border-top: 1px solid rgba(255,255,255,.12); margin-top: 28px; padding-top: 18px; font-size: 12px; opacity: .8; }
+
+    /* Fade in */
+    .reveal { opacity: 0; transform: translateY(18px); filter: blur(2px); }
+    .reveal.show { opacity: 1; transform: translateY(0); filter: none; transition: opacity .7s ease, transform .7s ease, filter .7s ease; }
+
+    @media (max-width: 900px) {
+      .hero-content { grid-template-columns: 1fr; gap: 40px; }
+      .foot { grid-template-columns: 1fr; gap: 20px; }
+      .nav { flex-direction: column; gap: 16px; }
+      .nav a { padding: 12px 16px; }
+      .container { padding: 0 20px; }
+      .hero { padding: 40px 0; }
+      .story, .mission, .cta-section { padding: 60px 0; }
+      .testimonial-card { padding: 30px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span>Wealth Our Way</span>
+      </div>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="index.html#services">Free Resources</a>
+        <a href="index.html#wealth-jumpstart">Wealth Jumpstart</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero container reveal">
+      <div class="hero-content">
+        <div class="hero-text">
+          <div class="subtitle">Meet the Founder</div>
+          <h1>Charles "Tank" Harris</h1>
+          <p style="font-size: 18px; line-height: 1.7;">From poverty to Wall Street, from survival to wealth creation. This is the story of how one man's journey became the foundation for helping thousands build generational wealth.</p>
+        </div>
+        <div class="hero-image" role="img" aria-label="Photo of Charles Tank Harris"></div>
+      </div>
+    </section>
+
+    <!-- STORY -->
+    <section class="story reveal">
+      <div class="container">
+        <div class="story-content">
+          <h2>My Story</h2>
+          
+          <p>I was raised by a single mother who by the age of 21, had three sons to provide for on her own. Ours was not a life focused upon building wealth, my upbringing focused upon surviving from one day to the next. A little more than a decade after my birth, my baby sister arrived. I had no idea we lived below the poverty line, to the left of me and right of me, everyone was in the same boat.</p>
+
+          <p>When I was fourteen years of age I ventured to a section of my beloved hometown of Philadelphia called Rittenhouse Square. It was on that day that I realized there were financial "haves" and "have nots" and that I was in the latter group. When I arrived home that night and discussed what I had seen with my mother, she explained to me the power of education and why she had been so adamant that my siblings and I forgo the streets to master the classroom.</p>
+
+          <div class="highlight">
+            <p>I am proud to say that the strong single mother that raised me now has four college degrees, earned by her children, mounted upon her wall. The story doesn't end there though. The hunger for education that my mother planted in us has continued to yield fruit.</p>
+            <p>Today you are the beneficiary of what my mother instilled in me decades ago.</p>
+          </div>
+
+          <p>I have spent the past 20 plus years at some of Wall Street's top financial firms. I have passed multiple exams, acquired multiple designations, logged countless continuing education hours and trained a myriad of the very financial professionals that are currently seeking to serve you. I have seen behind the curtain and I understand, now more than ever, why the streets of Rittenhouse Square were so much different than my own.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- MISSION -->
+    <section class="mission reveal">
+      <div class="container">
+        <div class="mission-content">
+          <h2>My Commitment to You</h2>
+          
+          <p>I founded Wealth Our Way on the flagship belief that, wealth is not only for the wealthy. It is our turn. Today is a new day. My commitment and pledge to you and your family is this, ACCESS. Access to knowledge, access to advice, access to guidance, access to the financial future you desire for you and your family.</p>
+
+          <p>I no longer live below the poverty line (neither does Mom) but I have never forgotten my humble beginnings and the debt I owe to this world. Wealth Our Way is more than a Financial Planning firm. Wealth Our Way is a movement. Join us!!</p>
+
+          <div class="learn-more" style="margin: 32px 0;">
+            <a class="btn btn-secondary" href="index.html#wealth-jumpstart" style="background: var(--emerald); color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; display: inline-block; transition: all 0.3s ease;">Learn More</a>
+          </div>
+
+          <div class="signature">
+            Sincerely<br>
+            Charles M. Harris Jr.<br>
+            Founder / President
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section reveal">
+      <div class="container">
+        <div class="cta-content">
+          <h2>Ready to Start Your Journey?</h2>
+          <p>Join thousands who have transformed their financial future with Wealth Our Way.</p>
+          <a class="btn btn-primary" href="index.html#wealth-jumpstart">Join the Waitlist</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="foot">
+        <div>
+          <div class="brand" style="margin-bottom:10px;">
+            <span class="brand-mark" aria-hidden="true"></span>
+            <span>Wealth Our Way</span>
+          </div>
+          <p style="margin-top: 0;">Education, access, and planning that help you build generational wealth.</p>
+        </div>
+        <div>
+          <h4>Connect</h4>
+          <a href="https://twitter.com/wealthourway" target="_blank" rel="noopener">Twitter</a><br>
+          <a href="mailto:team@wealthourway.com">team@wealthourway.com</a>
+        </div>
+        <div>
+          <h4>Quick Links</h4>
+          <a href="index.html">Home</a><br>
+          <a href="index.html#services">Free Resources</a><br>
+          <a href="index.html#wealth-jumpstart">Wealth Jumpstart</a>
+        </div>
+      </div>
+      <div class="copy">© <span id="year"></span> Wealth Our Way. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script>
+    // IntersectionObserver fade-ins
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+    // Fallback for older browsers: reveal immediately
+    if (!('IntersectionObserver' in window)) {
+      document.querySelectorAll('.reveal').forEach(el => el.classList.add('show'));
+    }
+
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
