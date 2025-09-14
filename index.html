@@ -149,6 +149,27 @@
     .modal-input { flex: 1; padding: 12px 16px; border-radius: 8px; border: none; font-size: 16px; }
     .modal-submit { padding: 12px 24px; background: var(--emerald); color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; }
     .modal-submit:hover { background: color-mix(in sRGB, var(--emerald) 85%, black); }
+    
+    /* Waitlist Modal */
+    .waitlist-modal-content { 
+      background: white; 
+      padding: 30px; 
+      border-radius: 12px; 
+      max-width: 600px; 
+      width: 90%; 
+      max-height: 80vh; 
+      overflow-y: auto;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .waitlist-modal-content h3 { 
+      font-family: 'Playfair Display', serif; 
+      font-size: 24px; 
+      margin-bottom: 20px; 
+    }
 
     @media (max-width: 900px) {
       .hero-inner { grid-template-columns: 1fr; gap: 30px; }
@@ -214,7 +235,7 @@
           <h1 class="headline">We help create generational wealth for our clients.</h1>
           <p class="sub">Straightforward education, proven strategies, and access to the same playbook the wealthy use—delivered with clarity and care.</p>
           <div class="cta-row">
-            <a class="btn btn-primary" href="#wealth-jumpstart">Start Creating Wealth</a>
+            <a class="btn btn-primary" href="#" onclick="openWaitlistModal(); return false;">Start Creating Wealth</a>
             <a class="btn btn-ghost" href="#services">Explore Free Resources</a>
           </div>
         </div>
@@ -239,7 +260,7 @@
         <div class="grid" style="margin-top: 26px;">
           <!-- Ebook -->
           <article class="card reveal">
-            <div class="media" onclick="openModal('./assets/E-book.png')">
+            <div class="media" onclick="openEbookModal()">
               <img src="./assets/E-book.png" alt="5 Major Money Moves ebook" />
             </div>
             <div class="card-body">
@@ -248,13 +269,13 @@
                 <div class="meta">Download • Free</div>
               </div>
               <p>Unlock the essential moves that can transform your financial future. Quick, clear, and actionable.</p>
-              <a class="btn btn-primary" onclick="openModal('./assets/E-book.png')">Download</a>
+              <a class="btn btn-primary" onclick="openEbookModal()">Download</a>
             </div>
           </article>
 
           <!-- Mini-Course -->
           <article class="card reveal">
-            <div class="media" onclick="openModal('./assets/big-mini-course.png')">
+            <div class="media">
               <img src="./assets/big-mini-course.png" alt="B.I.G. Mini-Course" />
             </div>
             <div class="card-body">
@@ -263,7 +284,7 @@
                 <div class="meta">Course • 1 Lesson • Free</div>
               </div>
               <p>Take charge of your money—and your future. Build your confidence and strategy.</p>
-              <a class="btn btn-primary" onclick="openModal('./assets/big-mini-course.png')">Take course</a>
+              <a class="btn btn-primary" href="https://iqw7q3fx62u1ngwuqbqx.app.clientclub.net/courses/offers/67881ce7-85b1-42e5-b5eb-ab9605089b9f" target="_blank" rel="noopener">Take course</a>
             </div>
           </article>
 
@@ -279,7 +300,7 @@
 
         <div style="text-align: center; margin-top: 40px;">
           <h3 style="color: white; font-size: 24px; margin-bottom: 20px;">Be the first to know when it goes live.</h3>
-          <a class="btn" href="#join-jumpstart" style="font-size: 18px; padding: 16px 24px; background: #0A0A0A; color: white; border: none; border-radius: 14px; text-decoration: none; display: inline-flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: .02em; transition: all .3s ease; box-shadow: 0 10px 20px rgba(0,0,0,.12);">Join the Waitlist</a>
+          <a class="btn" href="#" onclick="openWaitlistModal(); return false;" style="font-size: 18px; padding: 16px 24px; background: #0A0A0A; color: white; border: none; border-radius: 14px; text-decoration: none; display: inline-flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: .02em; transition: all .3s ease; box-shadow: 0 10px 20px rgba(0,0,0,.12);">Join the Waitlist</a>
         </div>
       </div>
     </section>
@@ -386,6 +407,38 @@
     </div>
   </div>
 
+  <!-- Waitlist Modal -->
+  <div id="waitlistModal" class="modal">
+    <span class="modal-close" onclick="closeWaitlistModal()">&times;</span>
+    <div class="waitlist-modal-content">
+      <h3 style="text-align: center; margin-bottom: 20px; color: var(--emerald);">Join the WOW Wealth Jumpstart Waitlist</h3>
+      <iframe 
+        src="https://link.gophoenix.agency/widget/form/OUggE3yURuq3BBDUSVjH" 
+        width="100%" 
+        height="600" 
+        frameborder="0" 
+        style="border-radius: 8px;"
+        title="WOW Wealth Jumpstart Waitlist Form">
+      </iframe>
+    </div>
+  </div>
+
+  <!-- Ebook Modal -->
+  <div id="ebookModal" class="modal">
+    <span class="modal-close" onclick="closeEbookModal()">&times;</span>
+    <div class="waitlist-modal-content">
+      <h3 style="text-align: center; margin-bottom: 20px; color: var(--emerald);">Get your free ebook!</h3>
+      <iframe 
+        src="https://link.gophoenix.agency/widget/form/rjWDVoGxnEjJOzXJTdvS" 
+        width="100%" 
+        height="600" 
+        frameborder="0" 
+        style="border-radius: 8px;"
+        title="Free Ebook Download Form">
+      </iframe>
+    </div>
+  </div>
+
   <script>
     // IntersectionObserver fade-ins
     const io = new IntersectionObserver((entries) => {
@@ -436,16 +489,30 @@
       modalImg.src = imageSrc;
       
       // Update text based on which image is clicked
-      if (imageSrc.includes('big-mini-course')) {
-        modalText.textContent = 'Enter your email to get access to the B.I.G. Mini-Course';
-      } else {
-        modalText.textContent = 'Enter your email to download the ebook or get access to the ebook';
-      }
+      modalText.textContent = 'Enter your email to download the ebook or get access to the ebook';
     }
 
     function closeModal() {
       const modal = document.getElementById('imageModal');
       modal.classList.remove('show');
+    }
+
+    // Waitlist Modal functions
+    function openWaitlistModal() {
+      document.getElementById('waitlistModal').style.display = 'block';
+    }
+
+    function closeWaitlistModal() {
+      document.getElementById('waitlistModal').style.display = 'none';
+    }
+
+    // Ebook Modal functions
+    function openEbookModal() {
+      document.getElementById('ebookModal').style.display = 'block';
+    }
+
+    function closeEbookModal() {
+      document.getElementById('ebookModal').style.display = 'none';
     }
 
     // Close modal when clicking outside the image
